@@ -45,7 +45,7 @@
     <!-- Align corresponding assignment statement tokens -->
     <rule ref="Generic.Formatting.MultipleStatementAlignment">
         <properties>
-            <property name="error" value="true"/>
+            <property name="alignAtEnd" value="false" />
         </properties>
     </rule>
     <!-- Force whitespace after a type cast -->
@@ -452,11 +452,6 @@
     <rule ref="Squiz.Classes.ClassFileName"/>
     <!-- Force `self::` for self-reference, force lower-case self, forbid spaces around `::` -->
     <rule ref="Squiz.Classes.SelfMemberReference"/>
-    <!-- Force phpDoc alignment -->
-    <rule ref="Squiz.Commenting.DocCommentAlignment">
-        <!-- Allow extra spaces after star, i.e. for indented annotations -->
-        <exclude name="Squiz.Commenting.DocCommentAlignment.SpaceAfterStar"/>
-    </rule>
     <!-- Force rules for function phpDoc -->
     <rule ref="Squiz.Commenting.FunctionComment">
         <!-- Allow `@throws` without description -->
