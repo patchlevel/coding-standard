@@ -1,6 +1,7 @@
 {
     "name": "patchlevel/coding-standard",
     "type": "phpcodesniffer-standard",
+    "license": "MIT",
     "description": "The Patchlevel Coding Standard is a set of PHPCS rules applied to all Patchlevel projects.",
     "keywords": [
         "patchlevel",
@@ -14,10 +15,16 @@
         "sniffs",
         "checks"
     ],
-    "license": "MIT",
+    "homepage": "https://github.com/patchlevel/coding-standard",
     "authors": [
-        {"name": "Daniel Badura", "email": "d.m.badura@googlemail.com"},
-        {"name": "David Badura", "email": "d.a.badura@googlemail.com"}
+        {
+            "name": "Daniel Badura",
+            "email": "d.m.badura@gmail.com"
+        },
+        {
+            "name": "David Badura",
+            "email": "d.a.badura@gmail.com"
+        }
     ],
     "require": {
         "php": "^7.4 || ^8.0",
