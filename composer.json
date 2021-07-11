@@ -19,18 +19,18 @@
     "authors": [
         {
             "name": "Daniel Badura",
-            "email": "d.m.badura@gmail.com"
+            "email": "daniel.badura@patchlevel.de"
         },
         {
             "name": "David Badura",
-            "email": "d.a.badura@gmail.com"
+            "email": "david.badura@patchlevel.de"
         }
     ],
     "require": {
         "php": "^7.4 || ^8.0",
-        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
         "slevomat/coding-standard": "^6.4.1",
-        "squizlabs/php_codesniffer": "^3.5.8"
+        "squizlabs/php_codesniffer": "^3.6.0"
     },
     "config": {
         "sort-packages": true
