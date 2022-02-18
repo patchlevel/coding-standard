@@ -14,5 +14,5 @@
     <arg value="p"/>
     <file>src</file>
 
-    <rule ref="Patchlevel"/>
+    <rule ref="PatchlevelCodingStandard"/>
 </ruleset>
