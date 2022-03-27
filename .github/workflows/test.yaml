@@ -7,6 +7,7 @@ on:
   push:
     branches:
       - "[0-9]+.[0-9]+.x"
+      - "renovate/*"
 
 jobs:
   static-analysis-coding-standard:
@@ -17,7 +18,7 @@ jobs:
     strategy:
       matrix:
         dependencies:
-          - "highest"
+          - "locked"
         php-version:
           - "8.1"
         operating-system:
