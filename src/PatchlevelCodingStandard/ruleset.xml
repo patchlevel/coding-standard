@@ -48,12 +48,6 @@
             <property name="spacing" value="0"/>
         </properties>
     </rule>
-    <!-- Force no whitespace after `!` -->
-    <rule ref="Generic.Formatting.SpaceAfterNot">
-        <properties>
-            <property name="spacing" value="0" />
-        </properties>
-    </rule>
     <!-- Forbid PHP 4 constructors -->
     <rule ref="Generic.NamingConventions.ConstructorName"/>
     <!-- Forbid any content before opening tag -->
@@ -108,20 +102,34 @@
     <rule ref="PSR2.ControlStructures.ElseIfDeclaration.NotAllowed">
         <type>error</type>
     </rule>
+    <!-- Disallow multiple attributes inside one #[] -->
+    <rule ref="SlevomatCodingStandard.Attributes.DisallowAttributesJoining"/>
+    <!-- Require only one attribute per line -->
+    <rule ref="SlevomatCodingStandard.Attributes.DisallowMultipleAttributesPerLine"/>
+    <!-- Attributes should be adjoined to the PHP element they belong to -->
+    <rule ref="SlevomatCodingStandard.Attributes.AttributeAndTargetSpacing"/>
+    <!-- Require PHPDoc always before attributes -->
+    <rule ref="SlevomatCodingStandard.Attributes.RequireAttributeAfterDocComment"/>
     <!-- Require that single line arrays have the correct spacing: no space around brackets and one space after comma -->
     <rule ref="SlevomatCodingStandard.Arrays.SingleLineArrayWhitespace"/>
     <!-- Require comma after last element in multi-line array -->
     <rule ref="SlevomatCodingStandard.Arrays.TrailingArrayComma"/>
+    <!-- Require no space before : and 1 space before Enum type -->
+    <rule ref="SlevomatCodingStandard.Classes.BackedEnumTypeSpacing"/>
     <!-- Require presence of constant visibility -->
     <rule ref="SlevomatCodingStandard.Classes.ClassConstantVisibility">
         <properties>
             <property name="fixable" value="true"/>
         </properties>
     </rule>
+    <!-- Enforce consistent constant spacing -->
+    <rule ref="SlevomatCodingStandard.Classes.ConstantSpacing"/>
     <!-- Forbid LSB for constants (static::FOO) -->
     <rule ref="SlevomatCodingStandard.Classes.DisallowLateStaticBindingForConstants"/>
     <!-- Forbid more than one constant declared per statement -->
     <rule ref="SlevomatCodingStandard.Classes.DisallowMultiConstantDefinition"/>
+    <!-- Forbid string expression property fetch ($foo->{'bar'}) -->
+    <rule ref="SlevomatCodingStandard.Classes.DisallowStringExpressionPropertyFetch"/>
     <!-- Forbid empty lines around type declarations -->
     <rule ref="SlevomatCodingStandard.Classes.EmptyLinesAroundClassBraces">
         <properties>
@@ -129,8 +137,25 @@
             <property name="linesCountBeforeClosingBrace" value="0"/>
         </properties>
     </rule>
+    <!-- Add one line around parent call in order to improve readability -->
+    <rule ref="SlevomatCodingStandard.Classes.ParentCallSpacing"/>
+    <!-- Ensure that there are consistent blank lines between properties. -->
+    <rule ref="SlevomatCodingStandard.Classes.PropertySpacing">
+        <properties>
+            <property name="minLinesCountBeforeWithComment" value="0" />
+        </properties>
+    </rule>
     <!-- Require usage of ::class instead of __CLASS__, get_class(), get_class($this), get_called_class() and get_parent_class() -->
     <rule ref="SlevomatCodingStandard.Classes.ModernClassNameReference"/>
+    <!-- https://github.com/slevomat/coding-standard#slevomatcodingstandardclassespropertydeclaration- -->
+    <rule ref="SlevomatCodingStandard.Classes.PropertyDeclaration">
+        <properties>
+            <property name="checkPromoted" value="true"/>
+            <property name="enableMultipleSpacesBetweenModifiersCheck" value="true"/>
+        </properties>
+    </rule>
+    <!-- Require usage of constructor property promotion -->
+    <rule ref="SlevomatCodingStandard.Classes.RequireConstructorPropertyPromotion"/>
     <!-- Forbid uses of multiple traits separated by comma -->
     <rule ref="SlevomatCodingStandard.Classes.TraitUseDeclaration"/>
     <!-- Require no spaces before trait use, between trait uses and one space after trait uses -->
@@ -150,6 +175,8 @@
     <rule ref="SlevomatCodingStandard.Classes.SuperfluousInterfaceNaming"/>
     <!-- Forbid suffix "Trait" for traits -->
     <rule ref="SlevomatCodingStandard.Classes.SuperfluousTraitNaming"/>
+    <!-- Forbid invalid annotation names in standard PHPDoc tags -->
+    <rule ref="SlevomatCodingStandard.Commenting.AnnotationName"/>
     <!-- Require specific order of phpDoc annotations with empty newline between specific groups -->
     <rule ref="SlevomatCodingStandard.Commenting.DocCommentSpacing">
         <properties>
@@ -172,8 +199,16 @@
                     @ODM\,
                     @PHPCR\,
                 "/>
-                <element value="@param"/>
-                <element value="@return"/>
+                <element value="
+                    @param,
+                    @psalm-param,
+                    @phpstan-param,
+                "/>
+                <element value="
+                    @return,
+                    @psalm-return,
+                    @phpstan-return,
+                "/>
                 <element value="@throws"/>
             </property>
         </properties>
@@ -211,8 +246,6 @@
     </rule>
     <!-- Report invalid format of inline phpDocs with @var -->
     <rule ref="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration"/>
-    <!-- Require comments with single line written as one-liners -->
-    <rule ref="SlevomatCodingStandard.Commenting.RequireOneLinePropertyDocComment"/>
     <!-- Forbid assignments in conditions -->
     <rule ref="SlevomatCodingStandard.ControlStructures.AssignmentInCondition"/>
     <!-- Require consistent spacing for block structures -->
@@ -256,6 +289,8 @@
     <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullCoalesceEqualOperator"/>
     <!-- Require usage of null coalesce operator when possible -->
     <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullCoalesceOperator"/>
+    <!-- Require usage of null safe operator when possible -->
+    <rule ref="SlevomatCodingStandard.ControlStructures.RequireNullSafeObjectOperator"/>
     <!-- Forbid usage of conditions when a simple return can be used -->
     <rule ref="SlevomatCodingStandard.ControlStructures.UselessIfConditionWithReturn"/>
     <!-- Forbid usage of boolean-only ternary operator usage (e.g. $foo ? true : false) -->
@@ -264,6 +299,8 @@
     <rule ref="SlevomatCodingStandard.Exceptions.DeadCatch"/>
     <!-- Require using Throwable instead of Exception -->
     <rule ref="SlevomatCodingStandard.Exceptions.ReferenceThrowableOnly"/>
+    <!-- Require non-capturing catch when the variable with exception is not used. -->
+    <rule ref="SlevomatCodingStandard.Exceptions.RequireNonCapturingCatch" />
     <!-- Ensure Arrow Functions declaration format -->
     <rule ref="SlevomatCodingStandard.Functions.ArrowFunctionDeclaration">
         <properties>
@@ -272,6 +309,30 @@
             <property name="spacesCountAfterArrow" value="1"/>
         </properties>
     </rule>
+    <!-- Disallow trailing commas in single line function calls -->
+    <rule ref="SlevomatCodingStandard.Functions.DisallowTrailingCommaInCall">
+        <properties>
+            <property name="onlySingleLine" value="true" />
+        </properties>
+    </rule>
+    <!-- Disallow trailing commas in single line closure use -->
+    <rule ref="SlevomatCodingStandard.Functions.DisallowTrailingCommaInClosureUse">
+        <properties>
+            <property name="onlySingleLine" value="true" />
+        </properties>
+    </rule>
+    <!-- Disallow trailing commas in single line function declarations -->
+    <rule ref="SlevomatCodingStandard.Functions.DisallowTrailingCommaInDeclaration">
+        <properties>
+            <property name="onlySingleLine" value="true" />
+        </properties>
+    </rule>
+    <!-- Require trailing commas in multiline function calls -->
+    <rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall"/>
+    <!-- Require trailing commas in multiline closure use -->
+    <rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInClosureUse"/>
+    <!-- Require trailing commas in multiline function declarations -->
+    <rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration"/>
     <!-- Require closures not referencing $this be static -->
     <rule ref="SlevomatCodingStandard.Functions.StaticClosure"/>
     <!-- Forbid unused variables passed to closures via `use` -->
@@ -358,7 +419,12 @@
     <!-- Forbid useless semicolon `;` -->
     <rule ref="SlevomatCodingStandard.PHP.UselessSemicolon"/>
     <!-- Require /* @var type $foo */ and similar simple inline annotations to be replaced by assert() -->
-    <rule ref="SlevomatCodingStandard.PHP.RequireExplicitAssertion"/>
+    <rule ref="SlevomatCodingStandard.PHP.RequireExplicitAssertion">
+        <properties>
+            <property name="enableAdvancedStringTypes" value="true"/>
+            <property name="enableIntegerRanges" value="true"/>
+        </properties>
+    </rule>
     <!-- Require use of short versions of scalar types (i.e. int instead of integer) -->
     <rule ref="SlevomatCodingStandard.TypeHints.LongTypeHints"/>
     <!-- Require the `null` type hint to be in the last position of annotations -->
@@ -396,7 +462,6 @@
             </property>
         </properties>
     </rule>
-    <rule ref="SlevomatCodingStandard.Classes.PropertyDeclaration"/>
     <rule ref="SlevomatCodingStandard.TypeHints.ReturnTypeHint">
         <properties>
             <property name="traversableTypeHints" type="array">
@@ -407,8 +472,18 @@
             </property>
         </properties>
     </rule>
+    <!-- Define unions style -->
+    <rule ref="SlevomatCodingStandard.TypeHints.UnionTypeHintFormat">
+        <properties>
+            <property name="withSpaces" value="no" />
+            <property name="shortNullable" value="no" />
+            <property name="nullPosition" value="last" />
+        </properties>
+    </rule>
     <!-- Forbid useless @var for constants -->
     <rule ref="SlevomatCodingStandard.TypeHints.UselessConstantTypeHint"/>
+    <!-- Require One Line Doc Comment where there's only 1 annotation present -->
+    <rule ref="SlevomatCodingStandard.Commenting.RequireOneLineDocComment"/>
     <!-- Forbid useless phpDocs for functions -->
     <rule ref="SlevomatCodingStandard.Commenting.UselessFunctionDocComment">
         <properties>
@@ -426,6 +501,8 @@
     <rule ref="SlevomatCodingStandard.Variables.DuplicateAssignmentToVariable"/>
     <!-- Forbid useless variables -->
     <rule ref="SlevomatCodingStandard.Variables.UselessVariable"/>
+    <!-- Require nowdoc syntax instead of heredoc when possible -->
+    <rule ref="SlevomatCodingStandard.PHP.RequireNowdoc" />
     <!-- Forbid spaces around square brackets -->
     <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
     <!-- Force array declaration structure -->
@@ -448,6 +525,11 @@
     <rule ref="Squiz.Classes.ClassFileName"/>
     <!-- Force `self::` for self-reference, force lower-case self, forbid spaces around `::` -->
     <rule ref="Squiz.Classes.SelfMemberReference"/>
+    <!-- Force phpDoc alignment -->
+    <rule ref="Squiz.Commenting.DocCommentAlignment">
+        <!-- Allow extra spaces after star, i.e. for indented annotations -->
+        <exclude name="Squiz.Commenting.DocCommentAlignment.SpaceAfterStar"/>
+    </rule>
     <!-- Force rules for function phpDoc -->
     <rule ref="Squiz.Commenting.FunctionComment">
         <!-- Allow `@throws` without description -->
@@ -511,9 +593,6 @@
     </rule>
     <!-- Forbid strings in `"` unless necessary -->
     <rule ref="Squiz.Strings.DoubleQuoteUsage"/>
-    <rule ref="Squiz.Strings.DoubleQuoteUsage.ContainsVar">
-        <message>Variable "%s" not allowed in double quoted string; use sprintf() or concatenation instead</message>
-    </rule>
     <!-- Forbid braces around string in `echo` -->
     <rule ref="Squiz.Strings.EchoedStrings"/>
     <!-- Forbid spaces in type casts -->
